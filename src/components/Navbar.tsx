@@ -18,6 +18,7 @@ const Navbar = () => {
 }
 
 const Wrapper = styled.section`
+  border-bottom: 1px solid lightgrey;
   .navbar {
     width: 90vw;
     max-width: 1170px;
@@ -26,11 +27,20 @@ const Wrapper = styled.section`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    text-align: center;
   }
   .nav-logo {
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+  @media screen and (max-width: 700px) {
+    .navbar {
+      display: grid;
+      place-content: center;
+      gap: 1rem;
+      margin: 1rem;
+    }
   }
 `
 

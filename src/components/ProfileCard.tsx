@@ -44,7 +44,7 @@ const Wrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 1rem;
+    gap: 2rem;
     width: 700px;
     margin: 0 auto;
     padding: 25px 0;
@@ -54,7 +54,6 @@ const Wrapper = styled.div`
     width: 215px;
     height: 215px;
     border-radius: 50%;
-    border: 1px solid var(--black);
   }
   @media screen and (max-width: 700px) {
     .card-wrapper {

@@ -8,8 +8,8 @@
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, 'Ubuntu', 'Segoe UI', 'Roboto',
+    'Oxygen', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -31,7 +31,8 @@ code {
 :root {
   /* basic colors */
   --white: rgb(255, 255, 255);
-  --grey: hsla(0, 0%, 100%, 0.71);
+  --light-grey: #cccccc;
+  --grey: #a7a7a7;
   --black: #16171b;
   --red: #b1361e;
   --dark-red: #a1321b;
@@ -52,16 +53,12 @@ Basic classes
 ===============
  */
 
-.btn {
-}
-
 .link-btn {
   display: block;
   text-decoration: none;
   padding: 10px 20px;
-  background: var(--black);
-  color: var(--blue);
-  border: 1px solid var(--blue);
+  background: var(--red);
+  color: var(--white);
   border-radius: 10px;
   margin-top: 2rem;
 }
