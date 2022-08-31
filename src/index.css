@@ -35,6 +35,8 @@ code {
   --black: #16171b;
   --red: #b1361e;
   --dark-red: #a1321b;
+  --light-red: #de935f;
+  --blue: #81a2be;
   --gold: #ffc60a;
   --light-gold: rgb(236, 213, 64);
   /* properties */
@@ -42,4 +44,24 @@ code {
   --spacing: 0.1rem;
   --radius: 0.75rem;
   --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* 
+===============
+Basic classes
+===============
+ */
+
+.btn {
+}
+
+.link-btn {
+  display: block;
+  text-decoration: none;
+  padding: 10px 20px;
+  background: var(--black);
+  color: var(--blue);
+  border: 1px solid var(--blue);
+  border-radius: 10px;
+  margin-top: 2rem;
 }
