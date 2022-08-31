@@ -19,6 +19,7 @@ const Navbar = () => {
 
 const Wrapper = styled.section`
   border-bottom: 1px solid lightgrey;
+  padding: 10px 0;
   .navbar {
     width: 90vw;
     max-width: 1170px;
