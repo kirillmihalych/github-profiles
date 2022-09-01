@@ -8,13 +8,7 @@ export const apiSlice = createApi({
     getInitialProfile: builder.query<InitialProfile, any>({
       query: () => '/users/kirillmihalych',
     }),
-    getSearchProfile: builder.query({
-      query: (query) => `/search/users?q=${query}`,
-      transformResponse: (result: any) => {
-        return console.log(result.items)
-      },
-    }),
   }),
 })
 
-export const { useGetInitialProfileQuery, useGetSearchProfileQuery } = apiSlice
+export const { useGetInitialProfileQuery } = apiSlice

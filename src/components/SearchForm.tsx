@@ -1,39 +1,12 @@
-import { useState } from 'react'
 import styled from 'styled-components'
 import { AiOutlineSearch } from 'react-icons/ai'
-import { useGetSearchProfileQuery } from '../features/api/apiSlice'
 
 const SearchForm = () => {
-  const [skip, setSkip] = useState(true)
-  const [query, setQuery] = useState('')
-  const { data: profiles } = useGetSearchProfileQuery(query, { skip })
-
-  const preventDefault = (e: any) => e.preventDefault()
-  const handleChange = (e: any) => setQuery(e.target.value)
-
-  const handleOnClickedBtn = () => {
-    setSkip((prev) => !prev)
-    setTimeout(() => {
-      setQuery('')
-      setSkip((prev) => !prev)
-    }, 100)
-  }
-
   return (
     <Wrapper>
-      <form className='search-form' onSubmit={preventDefault}>
-        <input
-          type='text'
-          placeholder='text'
-          value={query}
-          onChange={handleChange}
-          className='input-search'
-        />
-        <button
-          type='submit'
-          className='btn-search'
-          onClick={handleOnClickedBtn}
-        >
+      <form className='search-form'>
+        <input type='text' placeholder='text' className='input-search' />
+        <button type='submit' className='btn-search'>
           <AiOutlineSearch className='icon-search' />
         </button>
       </form>
