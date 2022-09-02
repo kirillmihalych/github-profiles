@@ -1,11 +1,39 @@
+import { useState } from 'react'
 import styled from 'styled-components'
 import { AiOutlineSearch } from 'react-icons/ai'
+import { useAppDispatch } from '../app/hooks'
+import { fetchProfiles } from '../features/profiles/profilesSlice'
 
 const SearchForm = () => {
+  const [query, setQuery] = useState('')
+
+  const dispatch = useAppDispatch()
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setQuery(e.target.value)
+
+  const handleSubmit = (
+    e: React.BaseSyntheticEvent<
+      Event,
+      EventTarget & HTMLFormElement,
+      EventTarget
+    >
+  ) => {
+    e.preventDefault()
+    dispatch(fetchProfiles(`https://api.github.com/search/users?q=${query}`))
+    setQuery('')
+  }
+
   return (
     <Wrapper>
-      <form className='search-form'>
-        <input type='text' placeholder='text' className='input-search' />
+      <form className='search-form' onSubmit={handleSubmit}>
+        <input
+          type='text'
+          placeholder='text'
+          value={query}
+          onChange={handleChange}
+          className='input-search'
+        />
         <button type='submit' className='btn-search'>
           <AiOutlineSearch className='icon-search' />
         </button>
