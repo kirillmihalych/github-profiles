@@ -1,6 +1,7 @@
 import { useAppSelector } from '../../app/hooks'
 import { selectProfiles } from './profilesSlice'
 import { LoadingSpinner } from '../../components'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 const ProfilesList = () => {
@@ -23,8 +24,7 @@ const ProfilesList = () => {
           <article key={id} className='profile'>
             <img src={avatar} alt='avatar img' className='img-profile' />
             <h2 className='title-profile'>{login}</h2>
-            <h3>Подписчики: 10</h3>
-            <h3>Репозитории: 10</h3>
+            <Link to={`/profiles/${login}`}>Подробнее</Link>
           </article>
         )
       })}

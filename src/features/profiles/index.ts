@@ -1,3 +1,4 @@
 import ProfilesList from './ProfilesList'
+import SingleProfile from './SingleProfile'
 
-export { ProfilesList }
+export { ProfilesList, SingleProfile }
