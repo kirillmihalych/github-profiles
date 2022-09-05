@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { fetchSingleProfile, selectProfiles } from './profilesSlice'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { BsGeoAlt } from 'react-icons/bs'
@@ -7,12 +7,14 @@ import { FiUsers } from 'react-icons/fi'
 import { AiOutlineLink } from 'react-icons/ai'
 import { GoRepo } from 'react-icons/go'
 import { RiBuildingLine } from 'react-icons/ri'
+import { LoadingSpinner } from '../../components'
+import { Error } from '../../components'
 import styled from 'styled-components'
 
 const SingleProfile = () => {
   const { login } = useParams()
   const dispatch = useAppDispatch()
-  const { single_profile } = useAppSelector(selectProfiles)
+  const { single_profile, status } = useAppSelector(selectProfiles)
   const {
     login: login_name,
     name: name,
@@ -29,6 +31,14 @@ const SingleProfile = () => {
   useEffect(() => {
     dispatch(fetchSingleProfile(`https://api.github.com/users/${login}`))
   }, [login])
+
+  if (status == 'loading') {
+    return <LoadingSpinner></LoadingSpinner>
+  }
+
+  if (status == 'rejected') {
+    return <Error></Error>
+  }
 
   return (
     <Wrapper>
