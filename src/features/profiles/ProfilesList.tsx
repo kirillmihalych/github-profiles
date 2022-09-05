@@ -24,7 +24,9 @@ const ProfilesList = () => {
           <article key={id} className='profile'>
             <img src={avatar} alt='avatar img' className='img-profile' />
             <h2 className='title-profile'>{login}</h2>
-            <Link to={`/profiles/${login}`}>Подробнее</Link>
+            <Link to={`/profiles/${login}`} className='link-btn'>
+              Подробнее
+            </Link>
           </article>
         )
       })}
@@ -51,8 +53,10 @@ const Wrapper = styled.section`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 10px;
-    background: rgba(236, 240, 241, 1);
+    padding: 30px 10px;
+  }
+  .profile:hover {
+    cursor: pointer;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   }
   .title-profile {

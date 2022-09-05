@@ -59,6 +59,11 @@ Basic classes
   padding: 10px 20px;
   background: var(--red);
   color: var(--white);
+  border: 2px solid var(--red);
   border-radius: 10px;
-  margin-top: 2rem;
+}
+
+.link-btn:hover {
+  background: white;
+  color: var(--red);
 }

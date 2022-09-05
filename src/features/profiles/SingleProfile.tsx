@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { fetchSingleProfile, selectProfiles } from './profilesSlice'
+import { fetchSingleProfile, fetchRepos, selectProfiles } from './profilesSlice'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { BsGeoAlt } from 'react-icons/bs'
 import { FiUsers } from 'react-icons/fi'
@@ -9,6 +9,7 @@ import { GoRepo } from 'react-icons/go'
 import { RiBuildingLine } from 'react-icons/ri'
 import { LoadingSpinner } from '../../components'
 import { Error } from '../../components'
+import Repositories from './Repositories'
 import styled from 'styled-components'
 
 const SingleProfile = () => {
@@ -30,6 +31,7 @@ const SingleProfile = () => {
 
   useEffect(() => {
     dispatch(fetchSingleProfile(`https://api.github.com/users/${login}`))
+    dispatch(fetchRepos(`https://api.github.com/users/${login}/repos`))
   }, [login])
 
   if (status == 'loading') {
@@ -41,59 +43,70 @@ const SingleProfile = () => {
   }
 
   return (
-    <Wrapper>
-      <article className='single-profile'>
-        {/* Аватар*/}
-        <div className='avatar-holder'>
-          <img src={img} alt='avatar img' className='avatar-img' />
-        </div>
-        {/* Имя */}
-        <div className='name'>
-          <h2>{name}</h2>
-          <h3>{login_name}</h3>
-        </div>
-        {/* Ссылка на Гитхуб */}
-        <div className='button'>
-          <a href={link} target='_blank'>
-            Гитхаб
-          </a>
-        </div>
-        {/* Био */}
-        <div className='bio'>
-          <p>{bio}</p>
-        </div>
-        {/* Фолловеры и Репозиторий */}
-        <div className='followers-repos'>
-          <h3 className='followers'>
-            <FiUsers></FiUsers>
-            {followers} подписчиков
-          </h3>
-          <h3 className='repos'>
-            <GoRepo></GoRepo>
-            {repos} репозиториев
-          </h3>
-        </div>
-        {/* Другая информация */}
-        <div className='info-profile'>
-          <h4>
-            <RiBuildingLine></RiBuildingLine> {company ? company : 'Не указано'}
-          </h4>
-          <h4>
-            <BsGeoAlt></BsGeoAlt> {location ? location : 'Не указано'}
-          </h4>
-          <h4>
-            <AiOutlineLink></AiOutlineLink> {blog ? blog : 'Не указано'}
-          </h4>
-        </div>
-      </article>
-    </Wrapper>
+    <>
+      <Wrapper>
+        <article className='single-profile'>
+          {/* Аватар*/}
+          <div className='avatar-holder'>
+            <img src={img} alt='avatar img' className='avatar-img' />
+          </div>
+          {/* Имя */}
+          <div className='name'>
+            <h2>{name}</h2>
+            <h3>{login_name}</h3>
+          </div>
+          {/* Ссылка на Гитхуб */}
+          <div className='button'>
+            <a href={link} target='_blank'>
+              Гитхаб
+            </a>
+          </div>
+          {/* Био */}
+          <div className='bio'>
+            <p>{bio}</p>
+          </div>
+          {/* Фолловеры и Репозиторий */}
+          <div className='followers-repos'>
+            <h3 className='followers'>
+              <FiUsers></FiUsers>
+              {followers} подписчиков
+            </h3>
+            <h3 className='repos'>
+              <GoRepo></GoRepo>
+              {repos} репозиториев
+            </h3>
+          </div>
+          {/* Другая информация */}
+          <div className='info-profile'>
+            <h4>
+              <RiBuildingLine></RiBuildingLine>{' '}
+              {company ? company : 'Не указано'}
+            </h4>
+            <h4>
+              <BsGeoAlt></BsGeoAlt> {location ? location : 'Не указано'}
+            </h4>
+            <h4>
+              <AiOutlineLink></AiOutlineLink> {blog ? blog : 'Не указано'}
+            </h4>
+          </div>
+        </article>
+        <Repositories />
+      </Wrapper>
+    </>
   )
 }
 
 const Wrapper = styled.section`
-  width: 350px;
-  max-width: 90vw;
-  margin: 3rem auto;
+  width: 90vw;
+  max-width: 1170px;
+  margin: 0 auto;
+  display: grid;
+  .single-profile {
+    width: 350px;
+    max-width: 90vw;
+    margin: 3rem auto;
+    padding: 1rem;
+  }
   .avatar-holder {
     text-align: center;
     margin-bottom: 1rem;
@@ -150,6 +163,10 @@ const Wrapper = styled.section`
       font-weight: lighter;
       color: var(--black);
     }
+  }
+  @media screen and (min-width: 850px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
   }
 `
 

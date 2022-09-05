@@ -19,6 +19,7 @@ interface SingleProfile {
 const initialState = {
   profiles: [],
   single_profile: <SingleProfile>{},
+  single_profile_repos: [],
   status: 'idle',
 }
 
@@ -36,6 +37,18 @@ export const fetchProfiles = createAsyncThunk(
 
 export const fetchSingleProfile = createAsyncThunk(
   'profiles/fetchSingleProfile',
+  async (url: string) => {
+    try {
+      const response = await axios.get(url)
+      return response.data
+    } catch (error) {
+      console.log(error)
+    }
+  }
+)
+
+export const fetchRepos = createAsyncThunk(
+  'profiles/fetchRepos',
   async (url: string) => {
     try {
       const response = await axios.get(url)
@@ -73,6 +86,18 @@ export const profilesSlice = createSlice({
         state.single_profile = action.payload
       })
       .addCase(fetchSingleProfile.rejected, (state) => {
+        state.status = 'rejected'
+      })
+    // fetch repos
+    builder
+      .addCase(fetchRepos.pending, (state) => {
+        state.status = 'loading'
+      })
+      .addCase(fetchRepos.fulfilled, (state, action) => {
+        state.status = 'succeeded'
+        state.single_profile_repos = action.payload
+      })
+      .addCase(fetchRepos.rejected, (state) => {
         state.status = 'rejected'
       })
   },
