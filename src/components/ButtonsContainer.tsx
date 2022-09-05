@@ -5,7 +5,7 @@ const ButtonsContainer = () => {
 }
 
 const Wrapper = styled.section`
-  @media screen and (max-width: 414px) {
+  @media screen and (max-width: 700px) {
     display: none;
   }
 `

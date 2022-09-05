@@ -8,7 +8,7 @@ const Navbar = () => {
     <Wrapper>
       <div className='navbar'>
         <Link to='/' className='nav-logo'>
-          <AiFillGithub /> Гит-хаб профили
+          <AiFillGithub className='git-icon' /> Гит-хаб профили
         </Link>
         <SearchForm />
         <ButtonsContainer />
@@ -33,13 +33,19 @@ const Wrapper = styled.section`
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 5px;
+    text-decoration: none;
+    color: var(--black);
+  }
+  .git-icon {
+    font-size: 2.25rem;
   }
   @media screen and (max-width: 700px) {
     .navbar {
       display: grid;
       place-content: center;
       gap: 1rem;
-      margin: 1rem;
+      margin: 1.5rem;
     }
   }
 `

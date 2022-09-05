@@ -29,7 +29,7 @@ const SearchForm = () => {
       <form className='search-form' onSubmit={handleSubmit}>
         <input
           type='text'
-          placeholder='text'
+          placeholder='Найти профиль'
           value={query}
           onChange={handleChange}
           className='input-search'
@@ -59,7 +59,7 @@ const Wrapper = styled.section`
   .input-search {
     padding: 0px 10px;
     background: transparent;
-    text-transform: capitalize;
+    letter-spacing: 0.05rem;
     flex: 1;
     border: none;
     outline: none;
