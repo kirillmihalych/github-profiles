@@ -4,6 +4,7 @@ import { selectProfiles } from './profilesSlice'
 import { LoadingSpinner } from '../../components'
 import { pagination } from '../../utils/pagination'
 import { Link } from 'react-router-dom'
+import { TbPlayerTrackNext, TbPlayerTrackPrev } from 'react-icons/tb'
 import styled from 'styled-components'
 
 const ProfilesList = () => {
@@ -11,6 +12,20 @@ const ProfilesList = () => {
   const [data, setData] = useState([])
   const [page, setPage] = useState(1)
   const pagedProfiles = pagination(profiles)
+
+  const onNextPageClicked = () => {
+    setPage((prev) => {
+      if (page >= pagedProfiles.length - 1) return 0
+      return prev + 1
+    })
+  }
+
+  const onPrevPageClicked = () => {
+    setPage((prev) => {
+      if (page <= 0) return pagedProfiles.length - 1
+      return prev - 1
+    })
+  }
 
   useEffect(() => {
     if (status === 'loading') return
@@ -26,27 +41,35 @@ const ProfilesList = () => {
   }
 
   return (
-    <Wrapper>
-      <section className='profiles'>
-        {data
-          ? data.map((profile) => {
-              const { id, login, avatar_url: avatar } = profile
+    <>
+      {data ? (
+        <Wrapper>
+          <section className='profiles'>
+            {data
+              ? data.map((profile) => {
+                  const { id, login, avatar_url: avatar } = profile
 
-              return (
-                <article key={id} className='profile'>
-                  <img src={avatar} alt='avatar img' className='img-profile' />
-                  <h2 className='title-profile'>{login}</h2>
-                  <Link to={`/profiles/${login}`} className='link-btn'>
-                    Подробнее
-                  </Link>
-                </article>
-              )
-            })
-          : null}
-      </section>
-      <section className='buttons'>
-        {data
-          ? pagedProfiles.map((item, index) => {
+                  return (
+                    <article key={id} className='profile'>
+                      <img
+                        src={avatar}
+                        alt='avatar img'
+                        className='img-profile'
+                      />
+                      <h2 className='title-profile'>{login}</h2>
+                      <Link to={`/profiles/${login}`} className='link-btn'>
+                        Подробнее
+                      </Link>
+                    </article>
+                  )
+                })
+              : null}
+          </section>
+          <section className='buttons'>
+            <button onClick={onPrevPageClicked} className='page-btn prev'>
+              <TbPlayerTrackPrev></TbPlayerTrackPrev>
+            </button>
+            {pagedProfiles.map((item, index) => {
               return (
                 <button
                   key={index}
@@ -56,10 +79,14 @@ const ProfilesList = () => {
                   {index + 1}
                 </button>
               )
-            })
-          : null}
-      </section>
-    </Wrapper>
+            })}
+            <button onClick={onNextPageClicked} className='page-btn next'>
+              <TbPlayerTrackNext></TbPlayerTrackNext>
+            </button>
+          </section>
+        </Wrapper>
+      ) : null}
+    </>
   )
 }
 
@@ -103,6 +130,9 @@ const Wrapper = styled.section`
   }
   .buttons {
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-bottom: 3rem;
   }
   .page-btn {
@@ -111,11 +141,17 @@ const Wrapper = styled.section`
     border: 2px solid var(--black);
     border-radius: 5px;
     padding: 5px 10px;
-    margin-left: 1rem;
+    margin: 0 0.5rem;
   }
   .page-btn:hover {
     background: var(--red);
     color: var(--white);
+  }
+  .next,
+  .prev {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 `
 
