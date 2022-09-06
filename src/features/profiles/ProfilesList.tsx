@@ -1,11 +1,21 @@
+import { useState, useEffect } from 'react'
 import { useAppSelector } from '../../app/hooks'
 import { selectProfiles } from './profilesSlice'
 import { LoadingSpinner } from '../../components'
+import { pagination } from '../../utils/pagination'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 const ProfilesList = () => {
   const { profiles, status } = useAppSelector(selectProfiles)
+  const [data, setData] = useState([])
+  const [page, setPage] = useState(1)
+  const pagedProfiles = pagination(profiles)
+
+  useEffect(() => {
+    if (status === 'loading') return
+    setData(pagedProfiles[page])
+  }, [status, page])
 
   if (status === 'loading') {
     return <LoadingSpinner />
@@ -17,30 +27,53 @@ const ProfilesList = () => {
 
   return (
     <Wrapper>
-      {profiles.map((profile) => {
-        const { id, login, avatar_url: avatar } = profile
+      <section className='profiles'>
+        {data
+          ? data.map((profile) => {
+              const { id, login, avatar_url: avatar } = profile
 
-        return (
-          <article key={id} className='profile'>
-            <img src={avatar} alt='avatar img' className='img-profile' />
-            <h2 className='title-profile'>{login}</h2>
-            <Link to={`/profiles/${login}`} className='link-btn'>
-              Подробнее
-            </Link>
-          </article>
-        )
-      })}
+              return (
+                <article key={id} className='profile'>
+                  <img src={avatar} alt='avatar img' className='img-profile' />
+                  <h2 className='title-profile'>{login}</h2>
+                  <Link to={`/profiles/${login}`} className='link-btn'>
+                    Подробнее
+                  </Link>
+                </article>
+              )
+            })
+          : null}
+      </section>
+      <section className='buttons'>
+        {data
+          ? pagedProfiles.map((item, index) => {
+              return (
+                <button
+                  key={index}
+                  onClick={() => setPage(index)}
+                  className='page-btn'
+                >
+                  {index + 1}
+                </button>
+              )
+            })
+          : null}
+      </section>
     </Wrapper>
   )
 }
 
 const Wrapper = styled.section`
-  width: 90vw;
-  max-width: 1170px;
-  margin: 3rem auto;
   display: grid;
-  gap: 3rem;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  place-items: center;
+  .profiles {
+    width: 90vw;
+    max-width: 1170px;
+    margin: 3rem auto;
+    display: grid;
+    gap: 3rem;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
   .img-profile {
     height: 150px;
     width: 150px;
@@ -67,6 +100,22 @@ const Wrapper = styled.section`
     max-width: 1170px;
     margin: 3rem auto;
     text-align: center;
+  }
+  .buttons {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  .page-btn {
+    cursor: pointer;
+    background: none;
+    border: 2px solid var(--black);
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin-left: 1rem;
+  }
+  .page-btn:hover {
+    background: var(--red);
+    color: var(--white);
   }
 `
 
