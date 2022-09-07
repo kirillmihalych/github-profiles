@@ -1,0 +1,73 @@
+import React from 'react'
+import styled from 'styled-components'
+import { BsGrid, BsList } from 'react-icons/bs'
+
+const SortProfiles = () => {
+  return (
+    <Wrapper>
+      <section className='sort-wrapper'>
+        <form className='sort-form'>
+          <label htmlFor='sort' className='sort-label'>
+            Сортировать по
+          </label>
+          <select name='sort' className='select-sort'>
+            <option value='a'>A - Z</option>
+            <option value='z'>Z - A</option>
+          </select>
+        </form>
+        <div className='btn-container'>
+          <button>
+            <BsGrid></BsGrid>
+          </button>
+          <button>
+            <BsList></BsList>
+          </button>
+        </div>
+      </section>
+    </Wrapper>
+  )
+}
+
+const Wrapper = styled.section`
+  width: 90vw;
+  max-width: 1170px;
+  margin: 0 auto;
+  margin-top: 2rem;
+  .sort-wrapper {
+    width: 300px;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1rem;
+    border: 2px solid rgba(155, 155, 155, 0.2);
+    border-radius: 10px;
+  }
+  .select-sort {
+    background: transparent;
+    border: 2px solid var(--black);
+    cursor: pointer;
+    margin-left: 0.5rem;
+  }
+  option {
+    background: var(--white);
+  }
+  .btn-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    button {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      background: none;
+      border: 2px solid var(--black);
+      color: var(--black);
+    }
+  }
+`
+
+export default SortProfiles

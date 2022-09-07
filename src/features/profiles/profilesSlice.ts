@@ -1,8 +1,7 @@
-import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
 import type { RootState } from '../../app/store'
 import SingleProfile from './SingleProfile'
-import { pagination } from '../../utils/pagination'
 
 interface SingleProfile {
   login: string

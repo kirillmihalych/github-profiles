@@ -10,7 +10,7 @@ import styled from 'styled-components'
 const ProfilesList = () => {
   const { profiles, status } = useAppSelector(selectProfiles)
   const [data, setData] = useState([])
-  const [page, setPage] = useState(1)
+  const [page, setPage] = useState(0)
   const pagedProfiles = pagination(profiles)
 
   const onNextPageClicked = () => {
@@ -45,25 +45,19 @@ const ProfilesList = () => {
       {data ? (
         <Wrapper>
           <section className='profiles'>
-            {data
-              ? data.map((profile) => {
-                  const { id, login, avatar_url: avatar } = profile
+            {data.map((profile) => {
+              const { id, login, avatar_url: avatar } = profile
 
-                  return (
-                    <article key={id} className='profile'>
-                      <img
-                        src={avatar}
-                        alt='avatar img'
-                        className='img-profile'
-                      />
-                      <h2 className='title-profile'>{login}</h2>
-                      <Link to={`/profiles/${login}`} className='link-btn'>
-                        Подробнее
-                      </Link>
-                    </article>
-                  )
-                })
-              : null}
+              return (
+                <article key={id} className='profile'>
+                  <img src={avatar} alt='avatar img' className='img-profile' />
+                  <h2 className='title-profile'>{login}</h2>
+                  <Link to={`/profiles/${login}`} className='link-btn'>
+                    Подробнее
+                  </Link>
+                </article>
+              )
+            })}
           </section>
           <section className='buttons'>
             <button onClick={onPrevPageClicked} className='page-btn prev'>
