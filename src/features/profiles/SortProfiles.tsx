@@ -1,8 +1,16 @@
-import React from 'react'
 import styled from 'styled-components'
 import { BsGrid, BsList } from 'react-icons/bs'
+import { useAppDispatch } from '../../app/hooks'
+import { setSort } from './profilesSlice'
 
 const SortProfiles = () => {
+  const dispatch = useAppDispatch()
+
+  const updateSort = (e: any) => {
+    let value = e.target.value
+    dispatch(setSort({ value }))
+  }
+
   return (
     <Wrapper>
       <section className='sort-wrapper'>
@@ -11,8 +19,12 @@ const SortProfiles = () => {
             Сортировать по
           </label>
           <select name='sort' className='select-sort'>
-            <option value='a'>A - Z</option>
-            <option value='z'>Z - A</option>
+            <option value='a' onClick={updateSort}>
+              A - Z
+            </option>
+            <option value='z' onClick={updateSort}>
+              Z - A
+            </option>
           </select>
         </form>
         <div className='btn-container'>

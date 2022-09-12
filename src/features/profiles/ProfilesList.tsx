@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
-import { useAppSelector } from '../../app/hooks'
-import { selectProfiles } from './profilesSlice'
+import { useAppSelector, useAppDispatch } from '../../app/hooks'
+import { selectProfiles, sortProfiles } from './profilesSlice'
 import { LoadingSpinner } from '../../components'
 import { pagination } from '../../utils/pagination'
 import { Link } from 'react-router-dom'
@@ -8,7 +8,8 @@ import { TbPlayerTrackNext, TbPlayerTrackPrev } from 'react-icons/tb'
 import styled from 'styled-components'
 
 const ProfilesList = () => {
-  const { profiles, status } = useAppSelector(selectProfiles)
+  const dispatch = useAppDispatch()
+  const { profiles, status, sort } = useAppSelector(selectProfiles)
   const [data, setData] = useState([])
   const [page, setPage] = useState(0)
   const pagedProfiles = pagination(profiles)
@@ -29,8 +30,9 @@ const ProfilesList = () => {
 
   useEffect(() => {
     if (status === 'loading') return
+    dispatch(sortProfiles())
     setData(pagedProfiles[page])
-  }, [status, page])
+  }, [status, page, sort, profiles])
 
   if (status === 'loading') {
     return <LoadingSpinner />

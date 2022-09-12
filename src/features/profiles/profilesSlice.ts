@@ -17,10 +17,11 @@ interface SingleProfile {
 }
 
 const initialState = {
-  profiles: [],
+  profiles: <any>[],
   single_profile: <SingleProfile>{},
   single_profile_repos: [],
   status: 'idle',
+  sort: '',
 }
 
 export const fetchProfiles = createAsyncThunk(
@@ -62,7 +63,32 @@ export const fetchRepos = createAsyncThunk(
 export const profilesSlice = createSlice({
   name: 'profiles',
   initialState,
-  reducers: {},
+  reducers: {
+    setSort(state, action) {
+      const { value } = action.payload
+      state.sort = value
+    },
+    sortProfiles(state) {
+      if (state.sort == 'a') {
+        state.profiles = state.profiles.sort(
+          (a: { login: string }, b: { login: string }) => {
+            return (
+              a.login.localeCompare(b.login) - b.login.localeCompare(a.login)
+            )
+          }
+        )
+      }
+      if (state.sort == 'z') {
+        state.profiles = state.profiles.sort(
+          (a: { login: string }, b: { login: string }) => {
+            return (
+              b.login.localeCompare(a.login) - a.login.localeCompare(b.login)
+            )
+          }
+        )
+      }
+    },
+  },
   extraReducers(builder) {
     // fetch list profiles
     builder
@@ -104,5 +130,7 @@ export const profilesSlice = createSlice({
 })
 
 export const selectProfiles = (state: RootState) => state.profiles
+
+export const { setSort, sortProfiles } = profilesSlice.actions
 
 export default profilesSlice.reducer
