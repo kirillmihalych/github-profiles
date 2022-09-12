@@ -70,7 +70,9 @@ const ProfilesList = () => {
                 <button
                   key={index}
                   onClick={() => setPage(index)}
-                  className='page-btn'
+                  className={
+                    page + 1 === index + 1 ? 'page-btn focused' : 'page-btn'
+                  }
                 >
                   {index + 1}
                 </button>
@@ -148,6 +150,10 @@ const Wrapper = styled.section`
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+  .focused {
+    background: var(--red);
+    color: var(--white);
   }
 `
 
