@@ -8,6 +8,8 @@ import { TbGitFork } from 'react-icons/tb'
 const Repositories = () => {
   const { single_profile_repos } = useAppSelector(selectProfiles)
 
+  console.log(single_profile_repos)
+
   return (
     <Wrapper>
       {single_profile_repos

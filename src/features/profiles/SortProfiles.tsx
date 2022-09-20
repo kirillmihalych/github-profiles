@@ -1,13 +1,12 @@
 import styled from 'styled-components'
-import { BsGrid, BsList } from 'react-icons/bs'
 import { useAppDispatch } from '../../app/hooks'
 import { setSort } from './profilesSlice'
 
 const SortProfiles = () => {
   const dispatch = useAppDispatch()
 
-  const updateSort = (e: any) => {
-    let value = e.target.value
+  const updateSort = (e: React.MouseEvent<HTMLOptionElement, MouseEvent>) => {
+    let value = (e.target as HTMLOptionElement).value
     dispatch(setSort({ value }))
   }
 
@@ -27,14 +26,6 @@ const SortProfiles = () => {
             </option>
           </select>
         </form>
-        <div className='btn-container'>
-          <button>
-            <BsGrid></BsGrid>
-          </button>
-          <button>
-            <BsList></BsList>
-          </button>
-        </div>
       </section>
     </Wrapper>
   )
@@ -46,7 +37,7 @@ const Wrapper = styled.section`
   margin: 0 auto;
   margin-top: 2rem;
   .sort-wrapper {
-    width: 300px;
+    width: 225px;
     padding: 5px 10px;
     display: flex;
     align-items: center;

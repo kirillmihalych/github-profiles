@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
 import axios from 'axios'
 import type { RootState } from '../../app/store'
 import SingleProfile from './SingleProfile'
@@ -20,8 +20,8 @@ const initialState = {
   profiles: <any>[],
   single_profile: <SingleProfile>{},
   single_profile_repos: [],
-  status: 'idle',
-  sort: '',
+  status: <string>'idle',
+  sort: <string>'',
 }
 
 export const fetchProfiles = createAsyncThunk(
