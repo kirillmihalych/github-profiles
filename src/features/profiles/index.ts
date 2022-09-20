@@ -1,5 +1,5 @@
 import ProfilesList from './ProfilesList'
-import SingleProfile from './SingleProfile'
+import SinglePageProfile from './SinglePageProfile'
 import SortProfiles from './SortProfiles'
 
-export { ProfilesList, SingleProfile, SortProfiles }
+export { ProfilesList, SinglePageProfile, SortProfiles }

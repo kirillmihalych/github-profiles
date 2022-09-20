@@ -32,3 +32,16 @@ export interface InitialProfile {
   created_at: Date
   updated_at: Date
 }
+
+export interface SingleProfile {
+  login: string
+  name: string
+  bio: string
+  blog: string
+  company: string
+  followers: number
+  public_repos: number
+  avatar_url: string
+  html_url: string
+  location: string
+}

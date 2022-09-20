@@ -1,27 +1,15 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
 import axios from 'axios'
 import type { RootState } from '../../app/store'
-import SingleProfile from './SingleProfile'
-
-interface SingleProfile {
-  login: string
-  name: string
-  bio: string
-  blog: string
-  company: string
-  followers: number
-  public_repos: number
-  avatar_url: string
-  html_url: string
-  location: string
-}
+import { SingleProfile } from '../../interfaces/interfaces'
 
 const initialState = {
-  profiles: <any>[],
   single_profile: <SingleProfile>{},
   single_profile_repos: [],
-  status: <string>'idle',
-  sort: <string>'',
+
+  profiles: <any>[],
+  status: 'idle',
+  sort: '',
 }
 
 export const fetchProfiles = createAsyncThunk(

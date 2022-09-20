@@ -7,11 +7,17 @@ import { Link } from 'react-router-dom'
 import { TbPlayerTrackNext, TbPlayerTrackPrev } from 'react-icons/tb'
 import styled from 'styled-components'
 
+interface IProfile {
+  id: number
+  login: string
+  avatar_url: string
+}
+
 const ProfilesList = () => {
   const dispatch = useAppDispatch()
   const { profiles, status, sort } = useAppSelector(selectProfiles)
-  const [data, setData] = useState([])
-  const [page, setPage] = useState(0)
+  const [data, setData] = useState<IProfile[]>([])
+  const [page, setPage] = useState<number>(0)
   const pagedProfiles = pagination(profiles)
 
   const onNextPageClicked = () => {
@@ -47,7 +53,7 @@ const ProfilesList = () => {
       {data ? (
         <Wrapper>
           <section className='profiles'>
-            {data.map((profile) => {
+            {data.map((profile: IProfile) => {
               const { id, login, avatar_url: avatar } = profile
 
               return (

@@ -12,7 +12,7 @@ import { Error } from '../../components'
 import Repositories from './Repositories'
 import styled from 'styled-components'
 
-const SingleProfile = () => {
+const SinglePageProfile = () => {
   const { login } = useParams()
   const dispatch = useAppDispatch()
   const { single_profile, status } = useAppSelector(selectProfiles)
@@ -170,4 +170,4 @@ const Wrapper = styled.section`
   }
 `
 
-export default SingleProfile
+export default SinglePageProfile

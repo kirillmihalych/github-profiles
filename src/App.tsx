@@ -1,6 +1,6 @@
 import { Navbar } from './components'
 import { HomePage } from './pages'
-import { SingleProfile } from './features/profiles'
+import { SinglePageProfile } from './features/profiles'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 function App() {
@@ -9,7 +9,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path='/' element={<HomePage />} />
-        <Route path='/profiles/:login' element={<SingleProfile />} />
+        <Route path='/profiles/:login' element={<SinglePageProfile />} />
       </Routes>
     </BrowserRouter>
   )
