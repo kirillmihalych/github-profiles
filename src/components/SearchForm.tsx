@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom'
 
 const SearchForm = () => {
   const [query, setQuery] = useState('')
-  let navigate = useNavigate()
+  const navigate = useNavigate()
 
   const dispatch = useAppDispatch()
 

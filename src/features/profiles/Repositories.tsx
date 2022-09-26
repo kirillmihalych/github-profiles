@@ -6,11 +6,17 @@ import { AiOutlineStar } from 'react-icons/ai'
 import { TbGitFork } from 'react-icons/tb'
 
 const Repositories = () => {
-  const { single_profile_repos } = useAppSelector(selectProfiles)
+  const { single_profile_repos: repos } = useAppSelector(selectProfiles)
+
+  const filtered = repos.filter((repo) => repo.stargazers_count > 0)
+
+  const sorted = filtered.sort(
+    (a, b) => b.stargazers_count - a.stargazers_count
+  )
 
   return (
     <Wrapper>
-      {single_profile_repos
+      {sorted
         .map((repo) => {
           const {
             id,
@@ -21,6 +27,7 @@ const Repositories = () => {
             forks,
             stargazers_count: stars,
           } = repo
+
           return (
             <article key={id} className='single-repo'>
               <div className='repos-title'>
