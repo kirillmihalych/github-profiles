@@ -44,54 +44,56 @@ const SinglePageProfile = () => {
 
   return (
     <>
-      <Wrapper>
-        <article className='single-profile'>
-          {/* Аватар*/}
-          <div className='avatar-holder'>
-            <img src={img} alt='avatar img' className='avatar-img' />
-          </div>
-          {/* Имя */}
-          <div className='name'>
-            <h2>{name}</h2>
-            <h3>{login_name}</h3>
-          </div>
-          {/* Ссылка на Гитхуб */}
-          <div className='button'>
-            <a href={link} target='_blank'>
-              Гитхаб
-            </a>
-          </div>
-          {/* Био */}
-          <div className='bio'>
-            <p>{bio}</p>
-          </div>
-          {/* Фолловеры и Репозиторий */}
-          <div className='followers-repos'>
-            <h3 className='followers'>
-              <FiUsers></FiUsers>
-              {followers} подписчиков
-            </h3>
-            <h3 className='repos'>
-              <GoRepo></GoRepo>
-              {repos} репозиториев
-            </h3>
-          </div>
-          {/* Другая информация */}
-          <div className='info-profile'>
-            <h4>
-              <RiBuildingLine></RiBuildingLine>{' '}
-              {company ? company : 'Не указано'}
-            </h4>
-            <h4>
-              <BsGeoAlt></BsGeoAlt> {location ? location : 'Не указано'}
-            </h4>
-            <h4>
-              <AiOutlineLink></AiOutlineLink> {blog ? blog : 'Не указано'}
-            </h4>
-          </div>
-        </article>
-        <Repositories />
-      </Wrapper>
+      {<Repositories /> && single_profile ? (
+        <Wrapper>
+          <article className='single-profile'>
+            {/* Аватар*/}
+            <div className='avatar-holder'>
+              <img src={img} alt='avatar img' className='avatar-img' />
+            </div>
+            {/* Имя */}
+            <div className='name'>
+              <h2>{name}</h2>
+              <h3>{login_name}</h3>
+            </div>
+            {/* Ссылка на Гитхуб */}
+            <div className='button'>
+              <a href={link} target='_blank'>
+                Гитхаб
+              </a>
+            </div>
+            {/* Био */}
+            <div className='bio'>
+              <p>{bio}</p>
+            </div>
+            {/* Фолловеры и Репозиторий */}
+            <div className='followers-repos'>
+              <h3 className='followers'>
+                <FiUsers></FiUsers>
+                {followers} подписчиков
+              </h3>
+              <h3 className='repos'>
+                <GoRepo></GoRepo>
+                {repos} репозиториев
+              </h3>
+            </div>
+            {/* Другая информация */}
+            <div className='info-profile'>
+              <h4>
+                <RiBuildingLine></RiBuildingLine>{' '}
+                {company ? company : 'Не указано'}
+              </h4>
+              <h4>
+                <BsGeoAlt></BsGeoAlt> {location ? location : 'Не указано'}
+              </h4>
+              <h4>
+                <AiOutlineLink></AiOutlineLink> {blog ? blog : 'Не указано'}
+              </h4>
+            </div>
+          </article>
+          <Repositories />
+        </Wrapper>
+      ) : null}
     </>
   )
 }
