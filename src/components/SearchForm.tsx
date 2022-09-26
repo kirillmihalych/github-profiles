@@ -3,9 +3,11 @@ import styled from 'styled-components'
 import { AiOutlineSearch } from 'react-icons/ai'
 import { useAppDispatch } from '../app/hooks'
 import { fetchProfiles } from '../features/profiles/profilesSlice'
+import { useNavigate } from 'react-router-dom'
 
 const SearchForm = () => {
   const [query, setQuery] = useState('')
+  let navigate = useNavigate()
 
   const dispatch = useAppDispatch()
 
@@ -20,8 +22,10 @@ const SearchForm = () => {
     >
   ) => {
     e.preventDefault()
+    if (query.length < 1) return
     dispatch(fetchProfiles(`https://api.github.com/search/users?q=${query}`))
     setQuery('')
+    navigate('/')
   }
 
   return (
