@@ -6,12 +6,7 @@ import { pagination } from '../../utils/pagination'
 import { Link } from 'react-router-dom'
 import { TbPlayerTrackNext, TbPlayerTrackPrev } from 'react-icons/tb'
 import styled from 'styled-components'
-
-interface IProfile {
-  id: number
-  login: string
-  avatar_url: string
-}
+import { IProfile } from '../../interfaces/interfaces'
 
 const ProfilesList = () => {
   const dispatch = useAppDispatch()

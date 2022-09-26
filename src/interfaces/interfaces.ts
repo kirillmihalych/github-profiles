@@ -45,3 +45,9 @@ export interface SingleProfile {
   html_url: string
   location: string
 }
+
+export interface IProfile {
+  id: number
+  login: string
+  avatar_url: string
+}

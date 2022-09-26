@@ -1,22 +1,29 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
 import axios from 'axios'
 import type { RootState } from '../../app/store'
-import { SingleProfile } from '../../interfaces/interfaces'
+import { SingleProfile, IProfile } from '../../interfaces/interfaces'
+
+interface StateProfiles {
+  single_profile: SingleProfile
+  single_profile_repos: never[]
+  profiles: any
+  status: string
+  sort: string
+}
 
 const initialState = {
   single_profile: <SingleProfile>{},
   single_profile_repos: [],
-
-  profiles: <any>[],
+  profiles: [],
   status: 'idle',
   sort: '',
-}
+} as StateProfiles
 
 export const fetchProfiles = createAsyncThunk(
   'profiles/fetchProfiles',
   async (url: string) => {
     try {
-      const response = await axios.get(url)
+      const response = await axios.get<IProfile[]>(url)
       return response.data
     } catch (error) {
       console.log(error)
@@ -28,7 +35,7 @@ export const fetchSingleProfile = createAsyncThunk(
   'profiles/fetchSingleProfile',
   async (url: string) => {
     try {
-      const response = await axios.get(url)
+      const response = await axios.get<SingleProfile>(url)
       return response.data
     } catch (error) {
       console.log(error)
@@ -48,11 +55,21 @@ export const fetchRepos = createAsyncThunk(
   }
 )
 
+interface textValue {
+  value: string
+}
+
+export interface ServerResponse {
+  total_count: number
+  incomplete_results: boolean
+  items: IProfile[]
+}
+
 export const profilesSlice = createSlice({
   name: 'profiles',
   initialState,
   reducers: {
-    setSort(state, action) {
+    setSort(state, action: PayloadAction<textValue>) {
       const { value } = action.payload
       state.sort = value
     },
@@ -83,10 +100,13 @@ export const profilesSlice = createSlice({
       .addCase(fetchProfiles.pending, (state) => {
         state.status = 'loading'
       })
-      .addCase(fetchProfiles.fulfilled, (state, action) => {
-        state.status = 'succeeded'
-        state.profiles = action.payload.items
-      })
+      .addCase(
+        fetchProfiles.fulfilled.type,
+        (state, action: PayloadAction<any>) => {
+          state.status = 'succeeded'
+          state.profiles = action.payload.items
+        }
+      )
       .addCase(fetchProfiles.rejected, (state) => {
         state.status = 'rejected'
       })
@@ -95,10 +115,13 @@ export const profilesSlice = createSlice({
       .addCase(fetchSingleProfile.pending, (state) => {
         state.status = 'loading'
       })
-      .addCase(fetchSingleProfile.fulfilled, (state, action) => {
-        state.status = 'succeeded'
-        state.single_profile = action.payload
-      })
+      .addCase(
+        fetchSingleProfile.fulfilled,
+        (state, action: PayloadAction<any>) => {
+          state.status = 'succeeded'
+          state.single_profile = action.payload
+        }
+      )
       .addCase(fetchSingleProfile.rejected, (state) => {
         state.status = 'rejected'
       })
@@ -107,7 +130,7 @@ export const profilesSlice = createSlice({
       .addCase(fetchRepos.pending, (state) => {
         state.status = 'loading'
       })
-      .addCase(fetchRepos.fulfilled, (state, action) => {
+      .addCase(fetchRepos.fulfilled, (state, action: PayloadAction<any>) => {
         state.status = 'succeeded'
         state.single_profile_repos = action.payload
       })
