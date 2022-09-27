@@ -43,6 +43,21 @@ const ProfilesList = () => {
     return <h3 className='error'>Что-то пошло не так ...</h3>
   }
 
+  if (status === 'succeeded' && profiles.length < 1) {
+    return (
+      <h4 className='no-matches'>
+        Поиск не дал результатов...<br></br>
+        Попробуйте ещё!
+      </h4>
+    )
+  } else if (status === 'idle') {
+    return (
+      <h4 className='no-matches'>
+        Добро пожаловать!<br></br>Начните поиск!
+      </h4>
+    )
+  }
+
   return (
     <>
       {data ? (

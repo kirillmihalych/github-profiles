@@ -96,7 +96,6 @@ export const profilesSlice = createSlice({
         state.status = 'loading'
       })
       .addCase(fetchProfiles.fulfilled, (state, action: PayloadAction<any>) => {
-        console.log(action)
         state.status = 'succeeded'
         state.profiles = action.payload.items
       })

@@ -67,3 +67,13 @@ Basic classes
   background: white;
   color: var(--red);
 }
+
+.no-matches {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 100;
+  margin-top: 1rem;
+  line-height: 1.2;
+  letter-spacing: var(--spacing);
+}
