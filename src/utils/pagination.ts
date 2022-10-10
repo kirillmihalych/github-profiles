@@ -1,4 +1,6 @@
-export const pagination = (followers: any) => {
+import { IProfile } from '../interfaces/interfaces'
+
+export const pagination = (followers: IProfile[]) => {
   const itemsPerPage = 6
   const pages = Math.ceil(followers.length / itemsPerPage)
 
