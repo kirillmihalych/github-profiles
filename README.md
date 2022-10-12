@@ -6,6 +6,7 @@
 ### You can see the full development process in the list of commits.
 
 Developed search app that uses GitHub API to retrieve information about
-users.   I used TS and Redux, so now project can be easily refactored or scaled.  
+users.  
+I used TS and Redux, so now project can be easily refactored or scaled.  
 Implemented the responsive design, used styled-components for a more
 comfortable way to structure css.  
